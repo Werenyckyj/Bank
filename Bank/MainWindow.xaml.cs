@@ -28,15 +28,11 @@ namespace Bank
         int pocetmesicu = 0;
         public MainWindow()
         {
+            TimeTick();
             InitializeComponent();
             lb_urok.Content = urok + "%";
             lb_time.Content = pocetmesicu + ". měsíc";
             listbox_spor.ItemsSource = S;
-
-            Timer myTimer = new Timer();
-            myTimer.Elapsed += new ElapsedEventHandler(TimeEvent);
-            myTimer.Interval = 5000;
-            myTimer.Start();
         }
 
         private void btn_Zalozit_Click(object sender, RoutedEventArgs e)
@@ -49,7 +45,8 @@ namespace Bank
                 S.Add(spo);
                 tb_text.Text = spo.Majitel + "," + spo.Zustatek + "Kč ," + spo.Urok + " %";
                 listbox_spor.Items.Refresh();
-            
+                tb_JmenoPrijemni.Text = null;
+                tb_Vklad.Text = null;
             }
             catch (Exception)
             {
@@ -95,29 +92,23 @@ namespace Bank
             Sporici spo = (Sporici)listbox_spor.SelectedItem;
             tb_text.Text = spo.Majitel + "," + spo.Zustatek + "Kč ," + spo.Urok + " %";
         }
-
-        public void btn_time_Click(object sender, RoutedEventArgs e)
+        public async Task TimeTick()
         {
-            
-
-            foreach (var item in S)
+            while (true)
             {
-                item.Zustatek = item.Zustatek * 1.05;
+                await Task.Delay(5000);
+                foreach (var item in S)
+                {
+                    item.Zustatek = item.Zustatek * 1.05;
+                }
+                if (listbox_spor.SelectedItem != null)
+                {
+                    Sporici spo = (Sporici)listbox_spor.SelectedItem;
+                    tb_text.Text = spo.Majitel + "," + spo.Zustatek + "Kč ," + spo.Urok + " %";
+                }
+                pocetmesicu++;
+                lb_time.Content = pocetmesicu + ". měsíc";
             }
-
-            pocetmesicu++;
-            lb_time.Content = pocetmesicu + ". měsíc";
-        }
-
-        public static void TimeEvent(object source, ElapsedEventArgs e)
-        {
-            foreach (var item in S)
-            {
-                item.Zustatek = item.Zustatek * 1.05;
-            }
-
-            pocetmesicu++;
-            lb_time.Content = pocetmesicu + ". měsíc";
         }
     }
 }

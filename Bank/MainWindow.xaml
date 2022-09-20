@@ -37,7 +37,6 @@
         <TextBox x:Name="tb_Vyber" HorizontalAlignment="Left" Height="25" Margin="88,290,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="65"/>
         <Button x:Name="bt_Vyber" Content="Vložit" HorizontalAlignment="Left" Height="25" Margin="153,290,0,0" VerticalAlignment="Top" Width="35" Click="bt_Vyber_Click"/>
         <Label Content="Přehled účtů:" HorizontalAlignment="Left" Height="25" Margin="35,323,0,0" VerticalAlignment="Top" Width="118"/>
-        <Button x:Name="btn_time" Content="Čas" HorizontalAlignment="Left" Height="28" Margin="127,432,0,0" VerticalAlignment="Top" Width="58" Click="btn_time_Click"/>
         <Label x:Name="lb_time" Content="x. měsíc" HorizontalAlignment="Left" Height="28" Margin="35,432,0,0" VerticalAlignment="Top" Width="78" FontSize="15"/>
 
     </Grid>
